@@ -11,7 +11,7 @@ $genero = $_SESSION['Genero'];
 
 include 'config.php';
 
-$sql = "SELECT name, price FROM toys WHERE gender = ?";
+$sql = "SELECT name, price, image AS image FROM toys WHERE gender = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("s", $genero);
 $stmt->execute();
@@ -29,10 +29,11 @@ $result = $stmt->get_result();
                 height: 100%;
                 margin: 0;
                 display: flex;
-                align-items: center;
+                
                 justify-content: center;
                 font-family: Arial, Helvetica, sans-serif;
                 background-color: #f4f4f9;
+                overflow: auto;
             }
 
             .container {
@@ -43,6 +44,7 @@ $result = $stmt->get_result();
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                 width: 90%;
                 max-width: 500px;
+                margin: auto;
             }
             h2 {
                 color: #333;
@@ -57,6 +59,13 @@ $result = $stmt->get_result();
                 margin: 15px 0;
                 border-bottom: 1px solid #ddd;
                 padding-bottom: 10px;
+            }
+
+            img {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 5px;
             }
 
             button {
@@ -81,6 +90,9 @@ $result = $stmt->get_result();
                 <ul>
                     <?php while ($row = $result->fetch_assoc()): ?>
                         <li>
+                            <?php if (!empty($row['image'])): ?>
+                                <img src="images/<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" ><br>
+                            <?php endif; ?>
                             <strong><?php echo htmlspecialchars($row['name'] ?? 'Nombre no disponible'); ?></strong><br>
                             Precio: $<?php echo htmlspecialchars($row['price'] ?? '0.00'); ?><br>
                             <form method="POST" action="enviar_juguete.php">
