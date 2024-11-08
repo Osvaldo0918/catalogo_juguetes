@@ -20,5 +20,4 @@
     exit();
   }
 
-  $mysqli->close();
 ?>
