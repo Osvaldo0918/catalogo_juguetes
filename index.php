@@ -7,10 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gender = htmlspecialchars($_POST['gender']);
 
     $sql = "INSERT INTO users (name, email, gender) VALUES (?,?,?)";
-    $stml = $mysqli->prepare($sql);
-    $stml->bind_param("sss", $name, $email, $gender);
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("sss", $name, $email, $gender);
 
-    if ($stml->execute()) {
+    if ($stmt->execute()) {
         $_SESSION['Nombre'] = $name;
         $_SESSION['Correo'] = $email;
         $_SESSION['Genero'] = $gender;
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error al insertar datos: " . $mysqli->error;
     }
 
-    $stml->close();
+    $stmt->close();
 }
 
 ?>
