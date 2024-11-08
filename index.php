@@ -2,9 +2,9 @@
 session_start();
 include 'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = htmlspecialchars($_POST['Nombre']);
-    $email = htmlspecialchars($_POST['Correo']);
-    $gender = htmlspecialchars($_POST['Genero']);
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $gender = htmlspecialchars($_POST['gender']);
 
     $sql = "INSERT INTO users (name, email, gender) VALUES (?,?,?)";
     $stml = $mysqli->prepare($sql);
