@@ -40,7 +40,7 @@ try{
     $mail->Host = 'smtp-mail.outlook.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'osvaldo_serrcu@comunidad.unam.mx';
-    $mail->Password = 'Therasmus_09';
+    $mail->Password = '';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
